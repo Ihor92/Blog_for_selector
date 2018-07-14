@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Селекторы</title>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<h1>Селекторы</h1>
+	<section>
+		<h2>Описание</h2>
+		<hr>
+		<div>
+			<p>
+				Итак, <span class="bold">селектор</span> - это формальное <span class="italic">описание</span> того <span class="italic">элемента</span> или <span class="italic">группы элементов</span>, к которым применяется указанное правило стиля.
+			</p>
+			<p>
+				Простой <span class="bold">селектор</span> представляет собой селектор <span class="italic">типа</span>, селектор <span class="italic">класса</span> либо <span class="bold"><abbr title="Уникальный признак объекта, позволяющий отличать его от других объектов, т.е. идентифицировать.">id</abbr></span>-селектор, за которым могут следовать селекторы <span class="italic">псевдоклассов</span> и селекторы <span class="italic">атрибутов</span> (о последних в данном кратком описании умолчим).
+			</p>
+		</div>
+
+		<div>
+			<p>
+				<span class="bold">Селектор</span> - это последовательность простых селекторов, разделенных пробелами либо символами <span class="bold">">"</span> и <span class="bold">"+"</span>. Указанные разделители имеют следущий смысл.
+			</p>
+			<ul>
+				<li>Пробел в последовательности селекторов соответствует понятию <span class="italic">"селектор потомков"</span>.</li>
+				<li>Символ <span class="bold">">"</span> в последовательности селекторов соответствует понятию <span class="italic">"дочерний селектор"</span>.</li>
+				<li>Символ <span class="bold">"+"</span> в последовательности селекторов соответствует понятию <span class="italic">"сестринский селектор"</span>.</li>
+				<li>Селекторы можно (и в ряде случаев, ради рациональности, нужно) группировать, разделяя запятыми. Например, следующая последовательность одинаковых объявлений, задающих цвет символов заголовков первых трех уровней:</li>
+			</ul>
+			<blockquote>
+				<span class="on-light-element">h1</span> { <br>
+					<span class="on-light-property">color: navy;</span> <br>
+				} <br>
+				<span class="on-light-element">h2</span> {<br>
+					<span class="on-light-property">color: navy;</span> <br>
+				} <br>
+				<span class="on-light-element">h3</span> { <br>
+					<span class="on-light-property">color: navy;</span> <br>
+				}
+			</blockquote>
+			<h4>Равносильна:</h4>
+			<blockquote>
+				<span class="on-light-element">h1, h2, h3</span> { <br>
+					<span class="on-light-property">color: navy;</span><br>
+				}
+			</blockquote>
+		</div>
+
+		<h2>Селекторы потомков</h2>
+		<hr>
+		<div>
+			<p>
+				Можно применять к <abbr title="Hyper Text Markup Language — язык гипертекстовой разметки." class="bold">HTML</abbr>-элементу определенный стиль в зависимости от того, вложен ли этот элемент в другой (то есть, является ли его потомком). Для этого названия элементов перечисляются в порядке их предполагаемой вложенности и разделяются пробелами. В следующем примере описывается селектор, согласно которому заголовки 1-го уровня (элемент <span class="bold">h1</span>) будут выведены красным цветом только внутри ячеек таблиц (<span class="bold">td</span>). Причем, внутри <span class="bold">всех</span> ячеек <span class="bold">всех</span> таблиц (даже если есть вложенные таблицы).
+			</p>
+			<blockquote>
+				<span class="on-light-element">td h1</span> { <br>
+					<span class="on-light-property">color: red;</span><br>
+				}	
+			</blockquote>
+		</div>
+
+		<h2>Дочерние селекторы</h2>
+		<hr>
+		<div>
+			<p>В ряде случаев нас интересуют не все <span class="italic">"потомки"</span> некоего структурного элемента, но лишь непосредственные - не <span class="italic">"внуки"</span> или <span class="italic">"правнуки"</span>, а только <span class="italic">"дети"</span> (<span class="bold">child</span>). Для указания того, что правило стиля относится только к непосредственному потомку, в селекторе используется символ <span class="bold">">"</span>. В следующем примере приведен селектор, согласно которому в ячейке (<span class="bold">td</span>) nтаблицы (<span class="bold">table</span>) некоего класса <span class="italic">"special"</span> заголовок 1-го уровня (<span class="bold">h1</span>) будет выведен красным цветом. Заметьте, что если в ячейке есть вложенная таблица, к заголовкам в ее ячейках это описание уже не относится.
+			</p>
+			<blockquote>
+				<span class="on-light-element">table.special td>h1</span> { <br>
+					<span class="on-light-property">color: red;</span><br>
+				}
+			</blockquote>
+		</div>
+
+		<h2>Сестринские селекторы</h2>
+		<hr>
+		<div>
+			<p>Сестринские селекторы используются в случаях, когда существенно, что некие структурные элементы являются потомками одного родительского и один из них непосредственно предшествует другому. В этом случае в селекторе используется символ "+".</p>
+
+			<p>Следующий пример иллюстрирует вполне реальную ситуацию. Как правило, уместно отделять заголовки от предшествующего текста значительным отступом (свойство <span class="bold">margin-top</span>). Такой отступ можно было бы задать, например, со значением 20-30 px. И это хорошо выглядит, если между заголовками разных уровней есть какой-то вводный текст. Но может оказаться, что в ряде случаев, скажем, между заголовками 1-го и 2-го уровня такого текста нет. То есть, эти заголовки непосредственно следуют один за другим. Тогда повышенный отступ явно не нужен.</p>
+
+			<p>Итак, следующие правила стиля говорят о том, что заголовок 2-го уровня (<span class="bold">h2</span>), как правило, отделяется от предшествущего текста отступом 30px. Но в случае, когда он идет непосредственно за заголовком 1-го уровня (<span class="bold">h1</span>), этот отступ снижается до 15px. Во втором объявлении использован сестринский селектор.</p>
+			<blockquote>
+				<span class="on-light-element">h2</span> { <br>
+					<span class="on-light-property">margin-top: 30px;</span><br>
+				} <br>
+				<span class="on-light-element">h1+h2</span> { <br>
+					<span class="on-light-property">margin-top: 15px;</span><br>
+				}
+			</blockquote>
+		</div>
+	</section>
+</body>
+</html>
+
